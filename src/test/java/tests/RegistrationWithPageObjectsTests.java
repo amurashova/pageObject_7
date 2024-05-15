@@ -40,6 +40,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
     }
     //минимальное количество данных
+
     @Test
     void fillFormTestMinimal() {
 
