@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.ResultsTable;
 
 
 import static com.codeborne.selenide.Condition.appear;
@@ -28,7 +29,14 @@ public class RegistrationPage {
 
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    ResultsTable checkResult = new ResultsTable();
 
+    public RegistrationPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove();");
+        executeJavaScript("$('footer').remove();");
+
+        return this;
+    }
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -57,7 +65,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setGender(String value) {
+    public RegistrationPage selectGender(String value) {
         genderWrapper.$(byText(value)).click();
 
         return this;
@@ -76,14 +84,14 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubjects(String startInput, String hint) {
+    public RegistrationPage selectSubjects(String startInput, String hint) {
         subjectsInput.setValue(startInput);
         $(byText(hint)).click();
 
         return this;
     }
 
-    public RegistrationPage setHobbies(String value) {
+    public RegistrationPage selectHobbies(String value) {
         hobbiesWrapper.$(byText(value)).click();
 
         return this;
@@ -100,14 +108,14 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setUserState(String startInput, String hint) {
+    public RegistrationPage selectUserState(String startInput, String hint) {
         stateInput.setValue(startInput);
         stateCityWrapper.$(byText(hint)).click();
 
         return this;
     }
 
-    public RegistrationPage setUserCity(String startInput, String hint) {
+    public RegistrationPage selectUserCity(String startInput, String hint) {
         cityInput.setValue(startInput);
         stateCityWrapper.$(byText(hint)).click();
 
@@ -120,12 +128,11 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
-
-        return this;
-    }
+    public  RegistrationPage checkResult(String key, String value)
+{
+    checkResult.CheckResult(key,value);
+    return this;
+}
 
     public RegistrationPage checkEmptyResult() {
         $(".table-responsive")

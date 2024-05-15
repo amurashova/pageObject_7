@@ -12,18 +12,19 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     void fillFormTest() {
 
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Anastasiya")
                 .setLastName("Murashova")
                 .setEmail("qwe@qwe.qwe")
-                .setGender("Female")
+                .selectGender("Female")
                 .setUserNumber("0123456789")
                 .setDateOfBirth(11, "February", "1995")
-                .setSubjects("e", "English")
-                .setHobbies("Reading")
+                .selectSubjects("e", "English")
+                .selectHobbies("Reading")
                 .uploadPicture("dog.jpg")
                 .setUserAddress("Morozova srt., 12-74")
-                .setUserState("N", "NCR")
-                .setUserCity("D", "Delhi")
+                .selectUserState("N", "NCR")
+                .selectUserCity("D", "Delhi")
                 .submitForm()
 
                 .checkResult("Student Name", "Anastasiya Murashova")
@@ -43,9 +44,10 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     void fillFormTestMinimal() {
 
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Anastasiya")
                 .setLastName("Murashova")
-                .setGender("Female")
+                .selectGender("Female")
                 .setUserNumber("0123456789")
                 .submitForm()
 
@@ -60,9 +62,10 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     void fillFormTestNegative() {
 
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Anastasiya")
                 .setLastName("Murashova")
-                .setGender("Female")
+                .selectGender("Female")
                 .setUserNumber("0")
                 .submitForm()
 
