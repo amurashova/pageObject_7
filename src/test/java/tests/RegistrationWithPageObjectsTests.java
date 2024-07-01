@@ -1,42 +1,47 @@
 package tests;
 
+
+
+import data.TestData;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
 
 public class RegistrationWithPageObjectsTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
+    TestData testData = new TestData();
 
 //заполнение все формы валидными данными
     @Test
     void fillFormTest() {
 
+
         registrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Anastasiya")
-                .setLastName("Murashova")
-                .setEmail("qwe@qwe.qwe")
-                .selectGender("Female")
-                .setUserNumber("0123456789")
-                .setDateOfBirth(11, "February", "1995")
-                .selectSubjects("e", "English")
-                .selectHobbies("Reading")
-                .uploadPicture("dog.jpg")
-                .setUserAddress("Morozova srt., 12-74")
-                .selectUserState("N", "NCR")
-                .selectUserCity("D", "Delhi")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.emailAddress)
+                .selectGender(testData.gender)
+                .setUserNumber(testData.number)
+                .setDateOfBirth(testData.day, testData.month, testData.year)
+                .selectSubjects("c", testData.subjects)
+                .selectHobbies(testData.hobbies)
+                .uploadPicture(testData.picture)
+                .setUserAddress(testData.streetAddress)
+                .selectUserState("n",testData.state)
+                .selectUserCity("a", testData.city)
                 .submitForm()
 
-                .checkResult("Student Name", "Anastasiya Murashova")
-                .checkResult("Student Email", "qwe@qwe.qwe")
-                .checkResult("Gender", "Female")
-                .checkResult("Mobile", "0123456789")
-                .checkResult("Date of Birth", "11 February,1995")
-                .checkResult("Subjects", "English")
-                .checkResult("Hobbies", "Reading")
-                .checkResult("Picture", "dog.jpg")
-                .checkResult("Address", "Morozova srt., 12-74")
-                .checkResult("State and City", "NCR Delhi");
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                .checkResult("Student Email", testData.emailAddress)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.number)
+                .checkResult("Date of Birth", testData.day + " " + testData.month + "," + testData.year)
+                .checkResult("Subjects", testData.subjects)
+                .checkResult("Hobbies", testData.hobbies)
+                .checkResult("Picture", testData.picture)
+                .checkResult("Address", testData.streetAddress)
+                .checkResult("State and City", testData.city);
 
     }
     //минимальное количество данных
@@ -46,15 +51,15 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
         registrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Anastasiya")
-                .setLastName("Murashova")
-                .selectGender("Female")
-                .setUserNumber("0123456789")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .selectGender(testData.gender)
+                .setUserNumber(testData.number)
                 .submitForm()
 
-                .checkResult("Student Name", "Anastasiya Murashova")
-                .checkResult("Gender", "Female")
-                .checkResult("Mobile", "0123456789");
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.number);
 
     }
 
@@ -64,9 +69,9 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
         registrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Anastasiya")
-                .setLastName("Murashova")
-                .selectGender("Female")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .selectGender(testData.gender)
                 .setUserNumber("0")
                 .submitForm()
 
