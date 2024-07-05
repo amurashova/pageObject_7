@@ -9,7 +9,6 @@ import pages.RegistrationPage;
 
 import static io.qameta.allure.Allure.step;
 
-
 public class RegistrationWithPageObjectsTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     TestData testData = new TestData();
